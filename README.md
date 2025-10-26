@@ -45,8 +45,8 @@ Deploy the adapter contract to enable cross-chain functionality:
 #### 2.1 Deploy DapposTokenOFT
 Deploy the OFT contract on BSC:
 - **Constructor Parameters:**
-  - `_name`: Token name (e.g., "DAPPOS")
-  - `_symbol`: Token symbol (e.g., "DOS")
+  - `_name`: Token name (e.g., "TT")
+  - `_symbol`: Token symbol (e.g., "T")
   - `_lzEndpoint`: BSC LayerZero Endpoint V2 address
     - Mainnet: `0x1a44076050125825900e736c501f859c50fE728c`
     - Testnet: `0x6EDCE65403992e310A62460808c4b910D972f10f`
@@ -64,6 +64,22 @@ Call `setPeer` on the DapposTokenAdapter contract:
   - `_peer`: Address of the BSC OFT contract (converted to bytes32)
     - Format: `bytes32(uint256(uint160(bscOftAddress)))`
 
+**Example:**
+```solidity
+// If BSC OFT address is: 0x5e2ED7BDBD1C0C17007b9C54cF52d6C1841D991F
+// The peer bytes32 value is: 0x0000000000000000000000005e2ED7BDBD1C0C17007b9C54cF52d6C1841D991F
+
+adapter.setPeer(30102, 0x0000000000000000000000005e2ED7BDBD1C0C17007b9C54cF52d6C1841D991F);
+```
+
+**Helper Function to Calculate Peer:**
+```solidity
+function calcPeer(address adapter) external pure returns(bytes32) {
+    return bytes32(uint256(uint160(adapter)));
+}
+```
+You can deploy this helper function in Remix to calculate the correct bytes32 peer value.
+
 #### 3.2 Set Peer on BSC OFT
 Call `setPeer` on the DapposTokenOFT contract:
 - **Function:** `setPeer(uint32 _eid, bytes32 _peer)`
@@ -73,6 +89,22 @@ Call `setPeer` on the DapposTokenOFT contract:
     - Ethereum Sepolia: `40161`
   - `_peer`: Address of the Ethereum Adapter contract (converted to bytes32)
     - Format: `bytes32(uint256(uint160(ethAdapterAddress)))`
+
+**Example:**
+```solidity
+// If Ethereum Adapter address is: 0xff4df8d469bd7130e706f70ae7e546c8becac6cc
+// The peer bytes32 value is: 0x000000000000000000000000ff4df8d469bd7130e706f70ae7e546c8becac6cc
+
+oft.setPeer(30101, 0x000000000000000000000000ff4df8d469bd7130e706f70ae7e546c8becac6cc);
+```
+
+**Helper Function to Calculate Peer:**
+```solidity
+function calcPeer(address adapter) external pure returns(bytes32) {
+    return bytes32(uint256(uint160(adapter)));
+}
+```
+You can deploy this helper function in Remix to calculate the correct bytes32 peer value.
 
 ### Step 4: Configure Enforced Options (Optional but Recommended)
 

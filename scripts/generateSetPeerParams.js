@@ -7,8 +7,8 @@ async function main() {
   
   const CONFIG = {
     // Contract addresses (deployed on respective chains)
-    adapterAddress: "0xff4df8d469bd7130e706f70ae7e546c8becac6cc",   // TODO: Fill in Ethereum Adapter address
-    oftAddress: "0x5e2ED7BDBD1C0C17007b9C54cF52d6C1841D991F",       // TODO: Fill in BSC OFT address
+    adapterAddress: "0x0000000000000000000000000000000000000000",   // TODO: Fill in Ethereum Adapter address
+    oftAddress: "0x0000000000000000000000000000000000000000",       // TODO: Fill in BSC OFT address
     
     // Chain IDs (LayerZero Endpoint IDs)
     chains: {
